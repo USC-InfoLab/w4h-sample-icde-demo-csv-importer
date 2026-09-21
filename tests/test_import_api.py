@@ -9,7 +9,9 @@ from w4h_sample_icde_demo_csv_importer.client import W4HClient
 def test_import_subjects_batch():
     if not os.environ.get("W4H_API_KEY", "").strip():
         pytest.skip("W4H_API_KEY not set")
-    dataset_id = os.environ.get("W4H_DATASET_ID", "sample-icde-demo-csv")
+    dataset_id = os.environ.get("W4H_DATASET_ID", "").strip()
+    if not dataset_id:
+        pytest.skip("W4H_DATASET_ID not set")
     client = W4HClient()
     result = client.import_csv_batch(
         dataset_id,
@@ -38,7 +40,9 @@ def test_import_gps_track_batch_coerces_malformed_latitude():
     reported separately by the importer)."""
     if not os.environ.get("W4H_API_KEY", "").strip():
         pytest.skip("W4H_API_KEY not set")
-    dataset_id = os.environ.get("W4H_DATASET_ID", "sample-icde-demo-csv")
+    dataset_id = os.environ.get("W4H_DATASET_ID", "").strip()
+    if not dataset_id:
+        pytest.skip("W4H_DATASET_ID not set")
     client = W4HClient()
     result = client.import_csv_batch(
         dataset_id,
@@ -77,7 +81,9 @@ def test_import_gps_track_batch_uses_icde_demo_prefix():
     the physical table prefix (ADR-016 changelog, 2026-08-21)."""
     if not os.environ.get("W4H_API_KEY", "").strip():
         pytest.skip("W4H_API_KEY not set")
-    dataset_id = os.environ.get("W4H_DATASET_ID", "sample-icde-demo-csv")
+    dataset_id = os.environ.get("W4H_DATASET_ID", "").strip()
+    if not dataset_id:
+        pytest.skip("W4H_DATASET_ID not set")
     client = W4HClient()
     result = client.import_csv_batch(
         dataset_id,
